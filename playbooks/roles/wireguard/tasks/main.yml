@@ -77,6 +77,14 @@
   args:
     creates: "{{ wireguard_gateway_location }}/wg0-client.conf"
 
+
+- name: Copy vpn client start/stop/status script to WireGuard Gateway directory
+  copy:
+    dest: {{ wireguard_gateway_location }}/vpn
+    owner: www-data
+    group: www-data
+    src: vpn
+
 - name: Generate the Markdown WireGuard instructions
   template:
     src: instructions.md.j2
