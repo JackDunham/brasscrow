@@ -13,8 +13,8 @@ localhost ansible_connection=local ansible_python_interpreter=python
 # 'host_key_checking = False' line in the ansible.cfg file. That setting
 # is only sensible and convenient when connecting to a brand-new host.
 #
-[brasscrow-host]
-10.10.10.10
+#[brasscrow-host]
+#10.10.10.10
 #
 # If the SSH user to be used to login is not "root", specify it here with
 # the ansible_user directive. BrassCrow will sudo automatically. If sudo
