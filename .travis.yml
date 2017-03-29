@@ -8,12 +8,12 @@ env:
 
 before_install:
   # Pull container.
-  - 'docker pull madbuda/docker-ubuntu1604-ansible:latest'
+  - 'docker pull geerlingguy/docker-ubuntu1604-ansible:latest'
 
 script:
   - container_id=$(mktemp)
   # Run container in detached state.
-  - 'docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} madbuda/docker-ubuntu1604-ansible:latest "${init}" > "${container_id}"'
+  - 'docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} geerlingguy/docker-ubuntu1604-ansible:latest "${init}" > "${container_id}"'
 
   # Ansible syntax check.
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml --syntax-check'
