@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/madbuda/brasscrow.svg?branch=master)](https://travis-ci.org/madbuda/brasscrow)
 BrassCrow
 =========
 
