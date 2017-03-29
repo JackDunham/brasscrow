@@ -80,7 +80,7 @@
 
 - name: Copy vpn client start/stop/status script to WireGuard Gateway directory
   copy:
-    dest: {{ wireguard_gateway_location }}/vpn
+    dest: "{{ wireguard_gateway_location }}/vpn"
     owner: www-data
     group: www-data
     src: vpn
