@@ -15,7 +15,7 @@
 
 - name: Configure the Server and install required software
 # ========================================================
-  hosts: brasscrow-host
+  hosts: localhost
 
   remote_user: root
   become: true
