@@ -131,7 +131,7 @@ Installation
 ### Execution ###
 1. Clone the BrassCrow repository and enter the directory.
 
-        git clone git@github.com:madbuda/vpn.git && cd BrassCrow
+        git clone git@github.com:madbuda/vpn.git && cd brasscrow
 2. Execute the BrassCrow script.
 
         ./BrassCrow
