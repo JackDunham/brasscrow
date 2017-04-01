@@ -24,6 +24,7 @@ echo -n "Which provider are you using?
   1. Amazon
   2. DigitalOcean
   3. Google
+  4. Exoscale
 : "
 
 read reply
@@ -32,5 +33,6 @@ case "$reply" in
   1) echo; echo; ansible-playbook amazon.yml;;
   2) echo; echo; ansible-playbook digitalocean.yml;;
   3) echo; echo; ansible-playbook google.yml;;
+  4) echo; echo; ansible-playbook exoscale.yml;;
   *) echo; echo "Invalid provider selected."; exit 1;;
 esac
