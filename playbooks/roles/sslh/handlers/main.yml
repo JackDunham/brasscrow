@@ -1,5 +1,0 @@
----
-- name: Restart sslh
-  service:
-    name: sslh
-    state: restarted

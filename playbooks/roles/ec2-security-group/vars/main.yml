@@ -1,2 +1,0 @@
----
-aws_security_group: "brasscrow-{{ aws_instance_name }}"
