@@ -29,8 +29,8 @@ echo -n "Which provider are you using?
 read reply
 
 case "$reply" in
-  1) echo; echo; ansible-playbook playbooks/amazon.yml;;
-  2) echo; echo; ansible-playbook playbooks/digitalocean.yml;;
-  3) echo; echo; ansible-playbook playbooks/google.yml;;
+  1) echo; echo; ansible-playbook amazon.yml;;
+  2) echo; echo; ansible-playbook digitalocean.yml;;
+  3) echo; echo; ansible-playbook google.yml;;
   *) echo; echo "Invalid provider selected."; exit 1;;
 esac
