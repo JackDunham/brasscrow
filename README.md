@@ -117,12 +117,7 @@ Installation
 
             sudo pip install "apache-libcloud>=0.17.0"
 
-  * Linode
 
-            sudo pip install linode-python
-  * Rackspace Cloud
-
-            sudo pip install pyrax
   * If you are using a Homebrew-installed version of Python you should also run these commands to make sure it can find the necessary libraries:
 
             mkdir -p ~/Library/Python/2.7/lib/python/site-packages
