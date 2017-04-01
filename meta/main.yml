@@ -16,8 +16,6 @@ galaxy_tags:
     - system
     - L2TP
     - IPsec
-    - OpenVPN 
     - MS-SSTP
     - L2TPv3
-    - server
 dependencies: []
