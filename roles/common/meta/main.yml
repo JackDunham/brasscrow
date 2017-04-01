@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Larry Ludlow
+  description: Roles to configure multifaceted vpn service
+  license: MIT
+  min_ansible_version: 2.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+galaxy_tags:
+    - vpn
+    - server
+    - ubuntu
+dependencies: []
