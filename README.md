@@ -131,7 +131,7 @@ Installation
 ### Execution ###
 1. Clone the BrassCrow repository and enter the directory.
 
-        git clone git@github.com:madbuda/vpn.git && cd brasscrow
+        git clone git@github.com:madbuda/brasscrow.git && cd brasscrow
 2. Execute the BrassCrow script.
 
         ./BrassCrow
@@ -147,8 +147,5 @@ You can also run BrassCrow on any number of new Ubuntu 16.04 servers. Dedicated 
 
 The servers should be accessible using SSH keys, and *root* is used as the connecting user by default (though this is simple to change while editing the inventory file).
 
-ToDo
------------------
-* Role isolation and selection, allowing you to choose which daemons and services are installed.
-* Easier setup.
+
 
