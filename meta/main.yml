@@ -8,13 +8,5 @@ galaxy_info:
   - name: Ubuntu
     versions:
     - xenial
-galaxy_tags:
-    - openvpn
-    - vpn
-    - server
-    - ubuntu
-    - system
-    - L2TP
-    - IPsec
-    - WireGuard
+galaxy_tags: [vpn]
 dependencies: []
