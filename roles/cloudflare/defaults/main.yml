@@ -1,0 +1,2 @@
+---
+brasscrow_ipaddress: "{{ brasscrow_ipv4_address }}"

@@ -1,0 +1,94 @@
+---
+- name: Apply the sysctl value to enable TCP Fast Open
+  sysctl:
+    name: net.ipv4.tcp_fastopen
+    value: 3
+    state: present
+
+- name: Install the shadowsocks-libev dependencies
+  apt:
+    name: "{{ item }}"
+    install_recommends: no
+  with_items: "{{ shadowsocks_dependencies }}"
+
+- name: Retrieve the shadowsocks-libev source code
+  get_url:
+    url: https://github.com/shadowsocks/shadowsocks-libev/archive/v{{ shadowsocks_version }}.tar.gz
+    dest: "{{ shadowsocks_source_location }}"
+    checksum: "{{ shadowsocks_checksum }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Extract the shadowsocks-libev source code
+  unarchive:
+    copy: no
+    src: "{{ shadowsocks_source_location }}"
+    dest: /usr/local/src
+    owner: root
+    group: root
+    creates: "{{ shadowsocks_compilation_directory }}/README.md"
+
+- name: Build the shadowsocks-libev package
+  shell: ./autogen.sh && dpkg-buildpackage -j{{ ansible_processor_cores }} -b -us -uc -i
+  args:
+    chdir: "{{ shadowsocks_compilation_directory }}"
+    creates: "{{ shadowsocks_compilation_directory }}/config.log"
+
+- name: Discover the package name (in case we are compiling on an exotic non-AMD64 architecture)
+  command: find /usr/local/src/ -name shadowsocks-libev*.deb
+  register: shadowsocks_debian_package_location
+
+- name: Install shadowsocks-libev
+  apt:
+    deb: "{{ shadowsocks_debian_package_location.stdout }}"
+
+- name: Ensure that shadowsocks-libev runs as an unprivileged user
+  lineinfile:
+    dest: /etc/default/shadowsocks-libev
+    regexp: "^USER"
+    line: "USER=nobody"
+
+- name: Generate a random Shadowsocks password
+  shell: openssl rand -base64 48 > {{ shadowsocks_password_file }}
+  args:
+    creates: "{{ shadowsocks_password_file }}"
+
+- name: Register Shadowsocks password
+  command: cat {{ shadowsocks_password_file }}
+  register: shadowsocks_password
+
+- name: Generate Shadowsocks config file
+  template:
+    src: config.json.j2
+    dest: "{{ shadowsocks_location }}/config.json"
+    mode: 0640
+  notify: Restart shadowsocks-libev
+
+- name: Create the Shadowsocks Gateway directory
+  file:
+    path: "{{ shadowsocks_gateway_location }}"
+    owner: www-data
+    group: www-data
+    mode: 0750
+    state: directory
+
+- name: Generate the Markdown Shadowsocks instructions
+  template:
+    src: instructions.md.j2
+    dest: "{{ shadowsocks_markdown_instructions }}"
+
+- name: Convert the Markdown Shadowsocks instructions into HTML and surround them with the header and footer template
+  shell: markdown {{ shadowsocks_markdown_instructions }} | cat {{ brasscrow_header_template }} - {{ brasscrow_footer_template }} > {{ shadowsocks_html_instructions }}
+
+- name: Generate the Shadowsocks QR code
+  # The ss:// URI format is documented here:
+  #   http://shadowsocks.org/en/config/quick-guide.html
+  shell: echo -n '{{ shadowsocks_encryption_method }}-auth:{{ shadowsocks_password.stdout }}@{{ brasscrow_ipv4_address }}:{{ shadowsocks_server_port }}' | base64 --wrap=0 | sed 's/^/ss:\/\//' | qrencode -s 8 -o {{ shadowsocks_qr_code }}
+
+- name: Set permissions on the Shadowsocks password file
+  file:
+    path: "{{ shadowsocks_password_file }}"
+    owner: root
+    group: root
+    mode: 0600

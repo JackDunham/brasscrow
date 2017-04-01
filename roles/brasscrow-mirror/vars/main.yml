@@ -1,0 +1,8 @@
+---
+brasscrow_mirror_location: "{{ brasscrow_gateway_location }}/mirror"
+
+brasscrow_markdown_mirror_page: "{{ brasscrow_mirror_location }}/index.md"
+brasscrow_html_mirror_page: "{{ brasscrow_mirror_location }}/index.html"
+
+brasscrow_mirror_warning: "One or more of the VPN clients could not be mirrored. Please file a bug report on GitHub so that the version number, checksum, or download location can be updated. Setup will now continue."
+brasscrow_mirror_warning_seconds: "20"
