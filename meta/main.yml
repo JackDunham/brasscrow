@@ -16,6 +16,5 @@ galaxy_tags:
     - system
     - L2TP
     - IPsec
-    - MS-SSTP
-    - L2TPv3
+    - WireGuard
 dependencies: []
