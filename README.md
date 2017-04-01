@@ -68,6 +68,13 @@ Services Provided
 
 Installation
 ------------
+Please read all installation instructions **carefully** before proceeding.
+
+### Important Clarification ###
+BrassCrow is based on [Ansible](http://www.ansible.com/home), an automation tool that is typically used to provision and configure files and packages on remote servers. BrassCrow automatically sets up **a remote server** with the VPN packages and configuration.
+
+BrassCrow will spin up and deploy **a server** on your chosen hosting provider when you run **on your home machine** (e.g. your laptop). Usually, you **do not run BrassCrow on the remote server** as by default this would result in the deployment of another server from your server and render the first server redundant (whew!). Support for local provisioning (i.e. BrassCrow locally configuring the system on which it is installed) will be added soon.
+
 ### Prerequisites ###
 
 
